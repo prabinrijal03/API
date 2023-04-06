@@ -11,10 +11,12 @@ exports.register = async(req,res,next)=>{
         throw err;
     }
 }
-exports.login = async (req,res,next)=>{
+exports.login = async(req,res,next)=>{
     try{
         const {email,password} = req.body;
+
         const user = await userService.checkuser(email);
+        
         if(!user){
             throw new Error('user dont exist');
         }
@@ -24,8 +26,8 @@ exports.login = async (req,res,next)=>{
         }
         let tokenData = {_id:user._id,email:user.email};
 
-        const token = await userService.generateToken(tokenData, "secretKey", '1h');
-        res.status(200).json({status:true, token:token});
+        const token = await userService.generateToken(tokenData, "secretKey", '1h')
+        res.status(200).json({status:true, token:token})
         }
     catch(err){
         throw err;

@@ -11,9 +11,9 @@ class userService{
             throw err;
         }
     }
-    static async checkuser({email}){
+    static async checkuser(email){
         try {
-            return await userModel.findOne({email});
+            return await userModel.findOne({email}); 
         } catch (error) {
             throw error;
         }
